@@ -4,9 +4,7 @@
     <p>uid:{{ uid }}</p> -->
 
     <h6>Firebase CRUD</h6>
-    <h2>
-      Photo Todos
-    </h2>
+    <h2>Photo Todos</h2>
     <p>インスタグラムで見る、こんな写真を撮ってみたい！</p>
     <div v-for="(reg, index) in regstar" :key="index">
       <p>{{ reg.displayName }}さんのTodosリスト</p>
@@ -37,9 +35,9 @@
                     入力項目を確認してください。
                   </p>
                   <ul>
-                    <li v-for="(error, index) in addTodoErrors" :key="index">
+                    <li v-for="(error0, index) in addTodoErrors" :key="index">
                       <p class="error-msg">
-                        {{ error }}
+                        {{ error0 }}
                       </p>
                     </li>
                   </ul>
@@ -74,9 +72,7 @@
                 </div>
               </form>
               <div class="modal-close" @click="isAddList = false">
-                <i class="material-icons">
-                  close
-                </i>
+                <i class="material-icons">close</i>
               </div>
             </div>
           </div>
@@ -88,9 +84,7 @@
           <div v-if="!item.done" class="ins-group ">
             <div class="like-spot">
               <div class="like-spot-header">
-                <span class="like-spot-title">
-                  {{ item.title }}
-                </span>
+                <span class="like-spot-title">{{ item.title }}</span>
                 <span
                   class="function-icon-more-vert"
                   @click="moreActive(index)"
@@ -101,7 +95,7 @@
                   <div v-if="isMore && selectMore === index" class="more-vert">
                     <span class="function-icon" @click="addActionPhoto(index)">
                       <i class="material-icons">add_a_photo</i>
-                      <span class="function-text">新規追加</span>
+                      <span class="function-text">DONE</span>
                     </span>
                     <span
                       class="function-icon"
@@ -122,9 +116,7 @@
                       class="function-icon"
                       @click="fullActive(index)"
                     >
-                      <i class="material-icons">
-                        fullscreen
-                      </i>
+                      <i class="material-icons">fullscreen</i>
                       <span class="function-text">画像拡大</span>
                     </span>
                   </div>
@@ -158,11 +150,11 @@
                         </p>
                         <ul>
                           <li
-                            v-for="(error, index) in addTodoErrors"
-                            :key="index"
+                            v-for="(error1, iError1) in addTodoErrors"
+                            :key="iError1"
                           >
                             <p class="error-msg">
-                              {{ error }}
+                              {{ error1 }}
                             </p>
                           </li>
                         </ul>
@@ -207,9 +199,7 @@
                       </div>
                     </form>
                     <div class="modal-close" @click="isAction = false">
-                      <i class="material-icons">
-                        close
-                      </i>
+                      <i class="material-icons">close</i>
                     </div>
                   </div>
                 </div>
@@ -233,11 +223,11 @@
                         </p>
                         <ul>
                           <li
-                            v-for="(error, index) in addTodoErrors"
-                            :key="index"
+                            v-for="(error2, iError2) in addTodoErrors"
+                            :key="iError2"
                           >
                             <p class="error-msg">
-                              {{ error }}
+                              {{ error2 }}
                             </p>
                           </li>
                         </ul>
@@ -261,9 +251,7 @@
                       </div>
                     </form>
                     <div class="modal-close" @click="isEdit = false">
-                      <i class="material-icons">
-                        close
-                      </i>
+                      <i class="material-icons">close</i>
                     </div>
                   </div>
                 </div>
@@ -286,9 +274,7 @@
           <div v-if="item.done" class="ins-group ">
             <div class="like-spot">
               <div class="like-spot-header">
-                <span class="like-spot-title">
-                  {{ item.title }}
-                </span>
+                <span class="like-spot-title">{{ item.title }}</span>
 
                 <span
                   class="function-icon-more-vert"
@@ -325,9 +311,7 @@
                       class="function-icon"
                       @click="fullActive(index)"
                     >
-                      <i class="material-icons">
-                        fullscreen
-                      </i>
+                      <i class="material-icons">fullscreen</i>
                       <span class="function-text">画像拡大</span>
                     </span>
                   </div>
@@ -348,11 +332,11 @@
                           </p>
                           <ul>
                             <li
-                              v-for="(error, index) in addTodoErrors"
-                              :key="index"
+                              v-for="(error3, iError3) in addTodoErrors"
+                              :key="iError3"
                             >
                               <p class="error-msg">
-                                {{ error }}
+                                {{ error3 }}
                               </p>
                             </li>
                           </ul>
@@ -376,9 +360,7 @@
                         </div>
                       </form>
                       <div class="modal-close" @click="isEdit = false">
-                        <i class="material-icons">
-                          close
-                        </i>
+                        <i class="material-icons">close</i>
                       </div>
                     </div>
                   </div>
@@ -407,9 +389,7 @@
               </div>
               <div class="respect">
                 <i class="material-icons">pageview</i>
-                <span class="like-spot-title">
-                  リスペクトした写真
-                </span>
+                <span class="like-spot-title">リスペクトした写真</span>
               </div>
 
               <blockquote
@@ -504,39 +484,39 @@ export default {
     ...mapState(['message']),
     ...mapState(['doneInsta'])
   },
-  created() {
-    // firebase
-    // this.$store.dispatch(INIT_TODO)
-    // console.log('conponents/content/about/conAbout.vue created()')
-    // if (process.browser) {
-    // window.addEventListener('scroll', this.handleScroll)
-    // }
-    // sample code1-----------------------------------
-    // var iframe = document.createElement('iframe');
-    // iframe.onload = function() { alert('myframe is loaded'); }; // before setting 'src'
-    // iframe.src = '...';
-    // document.body.appendChild(iframe); // add it to wherever you need it in the document
-    // sample code1-----------------------------------
-    // sample code2-----------------------------------
-    //   var iframe = document.createElement('iframe');
-    // iframe.addEventListener('load', function() { console.log('loaded!'); });
-    // document.getElementsByTagName('body')[0].appendChild(iframe);
-    // sample code2-----------------------------------
-    // test code
-    // const iframe = document.createElement('iframe')
-    // iframe.addEventListener('load', this.iframeLoaded)
-    // if (process.browser) {
-    //   document
-    //     .createElement('iframe')
-    //     .iframe.addEventListener('load', this.iframeLoaded)
-    // }
-    // if (process.browser) {
-    //   require('external_library')
-    // document
-    //   .createElement('iframe')
-    //   .iframe.addEventListener('load', this.iframeLoaded)
-    // }
-  },
+  // created() {
+  // firebase
+  // this.$store.dispatch(INIT_TODO)
+  // console.log('conponents/content/about/conAbout.vue created()')
+  // if (process.browser) {
+  // window.addEventListener('scroll', this.handleScroll)
+  // }
+  // sample code1-----------------------------------
+  // var iframe = document.createElement('iframe');
+  // iframe.onload = function() { alert('myframe is loaded'); }; // before setting 'src'
+  // iframe.src = '...';
+  // document.body.appendChild(iframe); // add it to wherever you need it in the document
+  // sample code1-----------------------------------
+  // sample code2-----------------------------------
+  //   var iframe = document.createElement('iframe');
+  // iframe.addEventListener('load', function() { console.log('loaded!'); });
+  // document.getElementsByTagName('body')[0].appendChild(iframe);
+  // sample code2-----------------------------------
+  // test code
+  // const iframe = document.createElement('iframe')
+  // iframe.addEventListener('load', this.iframeLoaded)
+  // if (process.browser) {
+  //   document
+  //     .createElement('iframe')
+  //     .iframe.addEventListener('load', this.iframeLoaded)
+  // }
+  // if (process.browser) {
+  //   require('external_library')
+  // document
+  //   .createElement('iframe')
+  //   .iframe.addEventListener('load', this.iframeLoaded)
+  // }
+  // },
   // destroyed () {
   //   window.removeEventListener('scroll', this.handleScroll);
   // },
@@ -569,6 +549,12 @@ export default {
           this.email = this.user.email
           this.$store.dispatch(INIT_TODO, this.user.uid)
           // なにかしらの処理
+          // loding--------------------------------------------------------------------------------
+          window.instgrm.Embeds.process()
+          this.$nextTick(() => {
+            this.$nuxt.$loading.start()
+            setTimeout(() => this.$nuxt.$loading.finish(), 10000)
+          })
         })
       } else {
         console.log('logout')
@@ -650,12 +636,12 @@ export default {
         shootDate: '',
         user: this.user.uid
       })
-      console.log('dispatch(ADD_TODO)')
+      // console.log('dispatch(ADD_TODO)')
       this.text = ''
       this.insUrl = ''
       this.isAddList = false
       await location.reload(true)
-      console.log('location.reload(true)')
+      // console.log('location.reload(true)')
       
     },
     // addTodoFirebase() {
@@ -682,8 +668,9 @@ export default {
       if (result) {
         this.$store.dispatch(REMOVE_TODO, { key: key, user: this.user.uid })
         this.isMore = false
-        location.reload(true)
+        // location.reload(true)
       }
+      window.instgrm.Embeds.process()
       // this.$store.dispatch(INIT_TODO)
       
     },
@@ -695,8 +682,9 @@ export default {
         // user: this.regstar[0].uid
         user: this.user.uid
       })
-      location.reload(true)
+      // location.reload(true)
       // location.href = '/about'
+       window.instgrm.Embeds.process()
     },
 
     onFileChange(e) {
@@ -768,22 +756,16 @@ export default {
         // user: this.regstar[0].uid
         user: this.user.uid
       }
-      // console.log(createDatas.insDaneUrl)
-
-      
       // this. createFile()
       const createPhoto = await this.$store.dispatch(CREATE_MYPHOTO, createDatas)
-      console.log('CREATE_MYPHOTO dispach firebase update end')
-      // alert('dispatch(CREATE_MYPHOTO, createDatas)')
       this.text = ''
       this.insUrl = ''
       this.isAction = false
       // location.href = '/about'
       // location.reload(true)
       await this.openDone()
-      console.log('openDone()')
-      // alert('dispatch(CREATE_MYPHOTO, createDatas)')
-      await location.reload(true)
+      // await location.reload(true)
+      await window.instgrm.Embeds.process()
     },
  
 
@@ -821,12 +803,13 @@ export default {
     },
     foldDoneList(){
       this.$store.commit('setDoneInsta')
-      location.reload(true)   
+      // location.reload(true)   
+      window.instgrm.Embeds.process()
    },
    openDone(){
-     console.log('openDone')
      this.$store.commit('openDoneInsta')
       // location.reload(true)   
+      window.instgrm.Embeds.process()
    },
 
 
@@ -869,7 +852,8 @@ export default {
         const edit = await this.$store.dispatch(EDIT_TODO, editDatas)
       }
       this.isEdit = false
-      location.reload(true)
+      // location.reload(true)
+      window.instgrm.Embeds.process()
     }
     // reload() {
     //   location.reload(true)
@@ -974,9 +958,10 @@ img {
 }
 
 .ins-group {
-  // border: 1px solid red;
   margin-bottom: 2rem;
-  padding: 1rem;
+  margin-right: 1rem;
+  border: 1px solid lightgray;
+  background-color: whitesmoke;
 }
 .ins-group-header {
   width: 326px;
@@ -984,12 +969,12 @@ img {
 }
 .like-spot {
   width: 326px;
-  position:relative;
-  // border: 1px solid green;
-
+  position: relative;
+  margin: 1rem;
 }
 .like-spot-header {
   width: 326px;
+  padding-bottom: 0.5rem;
 }
 .like-spot-title {
   width: 80%;
@@ -1292,6 +1277,7 @@ img {
     line-height: 2rem;
     color: gray;
   }
+  z-index: 2;
 }
 .modal-bg {
   position: fixed;

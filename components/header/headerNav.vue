@@ -16,11 +16,21 @@
             </div>
             <div class="menu_underline" />
           </div>
-          <div class="menu-item-box">
+          <!-- <div class="menu-item-box">
             <div
               class="menu_link"
               :class="{ menu_item_visible: page === '/about' }"
               @click="link_commit('/about')"
+            >
+              CRUD
+            </div>
+            <div class="menu_underline" />
+          </div> -->
+          <div class="menu-item-box">
+            <div
+              class="menu_link"
+              :class="{ menu_item_visible: page === '/crud' }"
+              @click="link_commit('/crud')"
             >
               CRUD
             </div>
@@ -83,11 +93,21 @@
               </a>
               <div class="menu_underline" />
             </div>
-            <div class="menu-item-box">
+            <!-- <div class="menu-item-box">
               <a
                 class="menu_link"
                 :class="{ menu_item_visible: page === '/about' }"
                 @click="link_commit('/about')"
+              >
+                CRUD
+              </a>
+              <div class="menu_underline" />
+            </div> -->
+            <div class="menu-item-box">
+              <a
+                class="menu_link"
+                :class="{ menu_item_visible: page === '/crud' }"
+                @click="link_commit('/crud')"
               >
                 CRUD
               </a>
@@ -211,6 +231,7 @@ export default {
   // background-color: #212121;
   margin: 0;
   padding: 0;
+  border: 1px border purple;
 }
 //nav-menu---------------------------------------
 .nav-menu {
@@ -221,8 +242,9 @@ export default {
   height: $header-height;
   display: flex;
   flex-direction: row;
-  // border: 1px border red;
-  background-color: $footer-color-color;
+  border: 1px border red;
+  // background-color: $footer-color-color;
+  background-color: none;
 }
 
 .nav-menu .left-block {

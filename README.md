@@ -1,4 +1,4 @@
-# nuxt-univ-gae-todo2-insta
+# nuxt-univ-gae-todo2-insta2
 
 ### アプリケーションの概要
 
@@ -1291,3 +1291,7 @@ https://github.com/nuxt-community/date-fns-module
 
 インスタグラムの埋め込みコードを使った、ウェブサイトへの表示
 https://qiita.com/h5y1m141@github/items/403dee38e88570185949
+
+# 埋め込みを動的に追加すると Instagram の埋め込みが機能しない(stock overflow)
+
+https://stackoverflow.com/questions/27408917/instagram-embeds-not-working-when-adding-embeds-dynamically

@@ -550,9 +550,11 @@ export default {
           this.$store.dispatch(INIT_TODO, this.user.uid)
           // なにかしらの処理
           // loding--------------------------------------------------------------------------------
+          console.log('conAbout  mounted loding')
           window.instgrm.Embeds.process()
           this.$nextTick(() => {
             this.$nuxt.$loading.start()
+            console.log('conAbout  $nuxt.$loading.start')
             setTimeout(() => this.$nuxt.$loading.finish(), 10000)
           })
         })
@@ -560,22 +562,6 @@ export default {
         console.log('logout')
       }
     })
-    // console.log(this.regstar[0].uid)
-    // console.log('mounted check uid ' + this.user.uid)
-    // this.$store.dispatch(INIT_TODO, this.regstar[0].uid)
-    // this.$store.dispatch(INIT_TODO, this.user.uid)
-    // this.$store.dispatch(INIT_TODO, this.regstar)
-    // console.log('mounted')
-    // location.href = '/about'
-    // this.$nextTick(() => {
-    //   this.$nuxt.$loading.start()
-    //   setTimeout(() => this.$nuxt.$loading.finish(), 10000)
-    // })
-    // this.$nextTick(() => {
-    //   setTimeout(() => {
-    //     this.insActive = true
-    //   }, 0)
-    // })
   },
 
   methods: {
@@ -625,7 +611,6 @@ export default {
     },
 
     async addTodoFirebase() {
-
       const addTodoNew = await this.$store.dispatch(ADD_TODO, {
         title: this.text,
         done: false,
@@ -640,9 +625,9 @@ export default {
       this.text = ''
       this.insUrl = ''
       this.isAddList = false
-      await location.reload(true)
+      await window.instgrm.Embeds.process()
+      // await location.reload(true)
       // console.log('location.reload(true)')
-      
     },
     // addTodoFirebase() {
 
@@ -661,7 +646,7 @@ export default {
     //   this.insUrl = ''
     //   this.isAddList = false
     //   location.reload(true)
-      
+
     // },
     removeTodoFirebase(key) {
       const result = window.confirm('削除しますか？')
@@ -672,7 +657,6 @@ export default {
       }
       window.instgrm.Embeds.process()
       // this.$store.dispatch(INIT_TODO)
-      
     },
     updateDoneTodoFirebase(key) {
       // console.log('updateDaneTodoFirebase')
@@ -684,7 +668,7 @@ export default {
       })
       // location.reload(true)
       // location.href = '/about'
-       window.instgrm.Embeds.process()
+      window.instgrm.Embeds.process()
     },
 
     onFileChange(e) {
@@ -713,7 +697,7 @@ export default {
       this.$store.commit('clearMessage')
       this.error.insDaneUrlBg = '#e3f2fd'
       this.error.fileBg = '#e3f2fd'
-      
+
       if (!this.insDaneUrl) {
         this.$store.commit('setAddTodoError', 'URLは必須です。')
         this.error.insDaneUrlBg = '#f8bbd0'
@@ -721,9 +705,9 @@ export default {
         this.$store.commit('setAddTodoError', '無効なURL形式です。')
         this.error.insDaneUrlBg = '#f8bbd0'
       }
-      if(!this.image) {
-         this.$store.commit('setAddTodoError', 'オリジナルイメージは必須です。')
-         this.error.fileBg = '#f8bbd0'
+      if (!this.image) {
+        this.$store.commit('setAddTodoError', 'オリジナルイメージは必須です。')
+        this.error.fileBg = '#f8bbd0'
       }
 
       if (this.addTodoErrors.length) {
@@ -732,13 +716,12 @@ export default {
         // alert('validation ok')
         this.onCreateMyPhoto(item)
       }
-      
-    }, 
+    },
 
     async onCreateMyPhoto(item) {
       let dt = new Date()
       let year = dt.getFullYear() //年
-      let month = dt.getMonth()+1 //1月が0、12月が11。そのため+1をする。
+      let month = dt.getMonth() + 1 //1月が0、12月が11。そのため+1をする。
       let date = dt.getDate() //日
       let today = year + '-' + month + '-' + date
       const createDatas = {
@@ -757,7 +740,10 @@ export default {
         user: this.user.uid
       }
       // this. createFile()
-      const createPhoto = await this.$store.dispatch(CREATE_MYPHOTO, createDatas)
+      const createPhoto = await this.$store.dispatch(
+        CREATE_MYPHOTO,
+        createDatas
+      )
       this.text = ''
       this.insUrl = ''
       this.isAction = false
@@ -767,10 +753,8 @@ export default {
       // await location.reload(true)
       await window.instgrm.Embeds.process()
     },
- 
 
-
-    addTodoList(){
+    addTodoList() {
       this.isAddList = !this.isAddList
       this.text = ''
       this.insUrl = ''
@@ -779,7 +763,7 @@ export default {
       this.error.testBg = '#e3f2fd'
       this.error.insUrlBg = '#e3f2fd'
     },
-    
+
     moreActive(idx) {
       this.isMore = !this.isMore
       this.selectMore = idx
@@ -801,17 +785,16 @@ export default {
       this.error.fileBg = '#e3f2fd'
       this.isMore = false
     },
-    foldDoneList(){
+    foldDoneList() {
       this.$store.commit('setDoneInsta')
-      // location.reload(true)   
+      // location.reload(true)
       window.instgrm.Embeds.process()
-   },
-   openDone(){
-     this.$store.commit('openDoneInsta')
-      // location.reload(true)   
+    },
+    openDone() {
+      this.$store.commit('openDoneInsta')
+      // location.reload(true)
       window.instgrm.Embeds.process()
-   },
-
+    },
 
     editActionPhoto(idx, item) {
       this.isEdit = !this.isEdit
@@ -822,7 +805,7 @@ export default {
       this.$store.commit('clearMessage')
       this.error.editSpotNameBg = '#e3f2fd'
     },
-    editTodo(item){
+    editTodo(item) {
       this.$store.commit('clearAddTodoError')
       this.$store.commit('clearMessage')
       this.error.editSpotNameBg = '#e3f2fd'
@@ -835,7 +818,6 @@ export default {
         this.error.editSpotNameBg = '#f8bbd0'
       }
       if (this.addTodoErrors.length) {
-
       } else {
         this.editTodoFirebase(item)
       }
@@ -885,7 +867,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
   // flex-grow: 2;
   @media (min-width: 768px) {
     flex-direction: row;
@@ -994,74 +976,73 @@ img {
     line-height: 1.4rem;
   }
 }
-.function-icon-more-vert{
+.function-icon-more-vert {
   position: absolute;
   top: 0;
   right: 0;
-  margin-top:.2rem;
+  margin-top: 0.2rem;
   cursor: pointer;
 }
-.function-icon{
+.function-icon {
   display: inline-block;
   text-align: right;
 }
-.more-vert{
-  width:12rem;
+.more-vert {
+  width: 12rem;
   height: 12rem;
   position: absolute;
   top: 0;
   right: 0;
-  z-index:1;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  margin: 2.5rem .5rem 0 0;
-  padding:  1rem;
+  margin: 2.5rem 0.5rem 0 0;
+  padding: 1rem;
   background-color: #fff;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-  border:1px solid rgba(0, 0, 0, 0.2); 
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 2px;
   // @media (min-width: 768px) {
   //   padding: 8rem 8rem;
   // }
 }
-.function-text{
-    display: inline-block;
-    font-size: 1rem;
-    font-weight: 500;
-    color:#212121;
-    line-height: .8rem;
-    padding-top:.8rem;
-    vertical-align: top;
-  }
+.function-text {
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #212121;
+  line-height: 0.8rem;
+  padding-top: 0.8rem;
+  vertical-align: top;
+}
 
 .action-spot-photo {
   width: 10rem;
   height: auto;
 }
-.respect{
+.respect {
   margin-top: 2rem;
 }
 .origin-photo {
   position: fixed;
   z-index: 2;
-  top:0;
-  left:0;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.origin-photo-wrap{
-  border:1px solid red;
-  width:95%;
+.origin-photo-wrap {
+  border: 1px solid red;
+  width: 95%;
   height: 80%;
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 .origin-photo img {
   width: 95%;
@@ -1077,7 +1058,7 @@ img {
   cursor: pointer;
   border: 1px solid #fff;
   border-radius: 3px;
-  
+
   i {
     width: 2rem;
     height: 2rem;
@@ -1139,24 +1120,22 @@ img {
   }
 }
 
-
-
-.add-new-form, 
-.add-done-ins-form, 
-.add-done-ins-form{
+.add-new-form,
+.add-done-ins-form,
+.add-done-ins-form {
   width: 100%;
   height: 100%;
   overflow: scroll;
   padding: 1rem;
   @media (min-width: 992px) {
-  border: 1px solid gray;
-  padding: 2rem;
+    border: 1px solid gray;
+    padding: 2rem;
   }
 }
-.add-new-form, 
-.add-done-ins-form, 
-.add-done-ins-form{
-  p{
+.add-new-form,
+.add-done-ins-form,
+.add-done-ins-form {
+  p {
     font-weight: 400;
     font-size: 1rem;
     line-height: 1rem;
@@ -1166,83 +1145,83 @@ img {
       line-height: 1rem;
     }
   }
-  
 }
-.error-grp{
+.error-grp {
   margin-bottom: 2rem;
 }
-.modal-title{
-    font-weight: 600;
-    font-size: 1rem;
-    line-height: 1rem;
-    margin-bottom: 2rem;
-    color: $footer-color-color;
-  @media (min-width: 992px) {
-    font-weight: 600;
-    font-size: 1rem;
-    line-height: 1rem;
-  }
-}
-.error-title{
-    font-weight: 600;
-    font-size: 1rem;
-    line-height: 1rem;
-    margin-bottom: 1rem;
-    color: rgb(2, 2, 2);
-  @media (min-width: 992px) {
-    font-weight: 600;
-    font-size: 1rem;
-    line-height: 1rem;
-  }
-}
-.error-msg{
+.modal-title {
   font-weight: 600;
-    font-size: 1rem;
-    line-height: 1rem;
-    margin-bottom: 1rem;
-    color: rgb(190, 29, 29);
-    margin-left: 1rem;
+  font-size: 1rem;
+  line-height: 1rem;
+  margin-bottom: 2rem;
+  color: $footer-color-color;
   @media (min-width: 992px) {
     font-weight: 600;
     font-size: 1rem;
     line-height: 1rem;
   }
 }
-.modal-msg{
+.error-title {
   font-weight: 600;
-    font-size: 1rem;
-    line-height: 1rem;
-    margin-bottom: 1rem;
-    color: rgb(3, 146, 46);
-    margin-left: 1rem;
+  font-size: 1rem;
+  line-height: 1rem;
+  margin-bottom: 1rem;
+  color: rgb(2, 2, 2);
   @media (min-width: 992px) {
     font-weight: 600;
     font-size: 1rem;
     line-height: 1rem;
   }
 }
-.add-btn button{
-    border: none;
-    background-color: $footer-color-color;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-    color: #fff;
-     margin-top: 1em;
-     outline: 0;
+.error-msg {
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1rem;
+  margin-bottom: 1rem;
+  color: rgb(190, 29, 29);
+  margin-left: 1rem;
+  @media (min-width: 992px) {
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1rem;
+  }
 }
-.modai-button{
- margin-top: .5rem;
+.modal-msg {
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1rem;
+  margin-bottom: 1rem;
+  color: rgb(3, 146, 46);
+  margin-left: 1rem;
+  @media (min-width: 992px) {
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1rem;
+  }
 }
-.add-new-form, .add-done-ins-form{
-  input{
+.add-btn button {
+  border: none;
+  background-color: $footer-color-color;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  color: #fff;
+  margin-top: 1em;
+  outline: 0;
+}
+.modai-button {
+  margin-top: 0.5rem;
+}
+.add-new-form,
+.add-done-ins-form {
+  input {
     width: 100%;
     @media (min-width: 992px) {
-     width: 100%; 
+      width: 100%;
     }
   }
 }
 
-.add-done-ins-form{
-  height:100%;
+.add-done-ins-form {
+  height: 100%;
   width: 100%;
 }
 
@@ -1292,12 +1271,12 @@ img {
 .selectBtn {
   font-size: 1rem;
 }
-.origin-photo-grp{
+.origin-photo-grp {
   margin-top: 1rem;
 }
-.origin-photo-add{
+.origin-photo-add {
   margin-top: 0rem;
-  padding: .2rem  .2rem .5rem .2rem;
+  padding: 0.2rem 0.2rem 0.5rem 0.2rem;
   border-top: 2px solid rgb(170, 170, 170);
   border-left: 2px solid rgb(170, 170, 170);
   border-right: 1px solid rgb(170, 170, 170);
@@ -1305,29 +1284,26 @@ img {
 
   // background-color:#e3f2fd;
 }
-.my-photo{
+.my-photo {
   display: block;
   width: 5rem;
   margin: 1rem 0;
   @media (min-width: 992px) {
-     width: 8rem; 
+    width: 8rem;
   }
   height: auto;
   border: 1px solid #212121;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
- 
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
-.unfold{
+.unfold {
   font-size: 2rem;
   line-height: 2rem;
   vertical-align: top;
-  margin-top: .2rem;
-  margin-left:-.2rem;
+  margin-top: 0.2rem;
+  margin-left: -0.2rem;
 }
-.testimage{
-  width:5rem;
-  height:auto;
+.testimage {
+  width: 5rem;
+  height: auto;
 }
-
-
 </style>

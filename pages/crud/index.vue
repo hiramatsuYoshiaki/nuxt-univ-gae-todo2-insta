@@ -19,12 +19,12 @@
       />
     </div>
 
-    <!-- <transition name="mainCon" appear> -->
-    <div class="content-main">
-      <ConAbout />
-      <!-- <nuxt-child /> -->
-    </div>
-    <!-- </transition> -->
+    <transition name="mainCon" appear>
+      <div class="content-main">
+        <ConAbout />
+        <!-- <nuxt-child /> -->
+      </div>
+    </transition>
 
     <transition name="mainCon" appear>
       <div class="content-footer">
@@ -92,12 +92,11 @@ export default {
     ...mapState(['items']),
     ...mapState(['user'])
   },
-  created() {
-    console.log('pages/about.vue created()')
-  },
+  // created() {
+  //   console.log('pages/about.vue created()')
+  // },
   mounted() {
     // console.log('pages/about.vue mounted()')
-
     setTimeout(() => {
       if (!this.isAuthenticated) {
         // ログインしていなかったら飛ぶページを設定
@@ -109,6 +108,13 @@ export default {
         // alert(this.user.uid)
         // console.log(this.regstar)
         // this.loaded = true
+        // window.instgrm.Embeds.process()
+        // console.log('crud index mounted loding')
+        // this.$nextTick(() => {
+        //   this.$nuxt.$loading.start()
+        //   console.log('crud index  $nuxt.$loading.start')
+        //   setTimeout(() => this.$nuxt.$loading.finish(), 10000)
+        // })
       }
     }, 0)
     // console.log('mounted')

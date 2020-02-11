@@ -1,24 +1,26 @@
 <template>
   <div class="content">
     <div v-if="isWaiting">
-      <p>login.....</p>
-      <svg
-        class="spinner"
-        width="65px"
-        height="65px"
-        viewBox="0 0 66 66"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <circle
-          class="path"
-          fill="none"
-          stroke-width="6"
-          stroke-linecap="round"
-          cx="33"
-          cy="33"
-          r="30"
-        />
-      </svg>
+      <div class="loading-wrape">
+        <p>login.....</p>
+        <svg
+          class="spinner"
+          width="65px"
+          height="65px"
+          viewBox="0 0 66 66"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle
+            class="path"
+            fill="none"
+            stroke-width="6"
+            stroke-linecap="round"
+            cx="33"
+            cy="33"
+            r="30"
+          />
+        </svg>
+      </div>
     </div>
     <div v-else>
       <div class="content-wrap">
@@ -26,7 +28,8 @@
           <div class="auth-title">
             <h2>INSTA TODOS</h2>
             <h6>私も撮りたい！</h6>
-            <h6>インスタグラムでみた素敵な写真を．．．</h6>
+            <h6>インスタグラムで</h6>
+            <h6>見た素敵な写真を．．．</h6>
           </div>
           <div class="top-image1">
             <img
@@ -41,16 +44,20 @@
             />
           </div>
           <div class="auth-guid">
-            Todosリストに、お気に入りのInstagramを表示できる。
+            フォトアクティビティが楽しくなる。Todosリストに、お気に入りのInstagramを表示できる。
           </div>
         </div>
         <div class="auth">
           <div class="auth-title">
             <h6>サインインすれば簡単に使える。</h6>
-            <h2>まずは、使ってみよう。</h2>
+            <h4>まずは、使ってみよう。</h4>
           </div>
           <div v-if="isAuthenticated">
-            <h2>こんにちは、{{ user.email }}さん</h2>
+            <h6>こんにちは、</h6>
+            <h4 class="auth-user">
+              {{ user.email }}
+            </h4>
+            <h6>さん</h6>
             <p>{{ user.email }}さんでログイン中です。</p>
             <!-- <p>e-mail:{{ user.email }}</p> -->
             <div class="add-btn">
@@ -62,7 +69,7 @@
           </div>
           <div v-else>
             <div class="auth-guid">
-              <h5>Demoでログインしてみる。</h5>
+              <h6>Demoでログインしてみる。</h6>
               <p>デモユーザーでログインする場合は、以下を入力してください。</p>
               <p>メール：demo@gmail.com</p>
               <p>パスワード：demo1111</p>
@@ -259,18 +266,18 @@ export default {
           .auth()
           .createUserWithEmailAndPassword(this.email, this.password)
           .then((res) => {
-            console.log('createUserWithEmailAndPassword')
+            // console.log('createUserWithEmailAndPassword')
             const user = firebase.auth().currentUser
-            console.log('uid: ' + user.uid)
-            console.log('email: ' + user.email)
-            console.log('displayName: ' + this.displayName)
+            // console.log('uid: ' + user.uid)
+            // console.log('email: ' + user.email)
+            // console.log('displayName: ' + this.displayName)
             return user
           })
           .then((user) => {
-            console.log('firebase auth add user')
-            console.log('uid: ' + user.uid)
-            console.log('email: ' + user.email)
-            console.log('displayName: ' + this.displayName)
+            // console.log('firebase auth add user')
+            // console.log('uid: ' + user.uid)
+            // console.log('email: ' + user.email)
+            // console.log('displayName: ' + this.displayName)
             this.$store.dispatch(ADD_REGISTORY, {
               uid: user.uid,
               email: user.email,
@@ -284,12 +291,12 @@ export default {
           })
           .catch((error) => {
             // alert('signin error' + error)
-            console.log('signin error' + error)
+            // console.log('signin error' + error)
             this.isWaiting = false
             this.$store.commit('setAuthError', error)
           })
       } else {
-        console.log('login email pass')
+        // console.log('login email pass')
         firebase
           .auth()
           .signInWithEmailAndPassword(this.email, this.password)
@@ -358,6 +365,18 @@ $duration: 1.4s;
   //   @media (min-width: 768px) {
   //     padding: 8rem 8rem;
   //   }
+}
+.loading-wrape {
+  width: 100%;
+  height: 100%;
+  margin: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @media (min-width: 992px) {
+    margin: 5rem;
+  }
 }
 .content-wrap {
   width: 100%;
@@ -435,6 +454,22 @@ $duration: 1.4s;
 }
 .auth-title {
   margin-bottom: 2rem;
+  h4 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    @media (min-width: 992px) {
+      font-size: 2.4rem;
+    }
+  }
+  h6 {
+    font-size: 1.2rem;
+    @media (min-width: 992px) {
+      font-size: 1.6rem;
+    }
+  }
+}
+.auth-user {
+  color: dodgerblue;
 }
 .auth-guid {
   margin-top: 2rem;

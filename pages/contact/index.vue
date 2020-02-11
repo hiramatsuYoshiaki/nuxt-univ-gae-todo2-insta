@@ -12,7 +12,6 @@
     </div>
     <transition name="mainCon" appear>
       <ConContact />
-      contact
     </transition>
     <transition appear name="transitionScreen">
       <TransitionScreen v-if="page === '/contact'" />
@@ -88,11 +87,9 @@ export default {
   width: 100vw;
   height: calc(100vh - #{$header-height});
   margin-top: $header-height;
-  padding: 0 2rem;
-  @media (min-width: 992px) {
-    padding: 0 5rem;
-  }
+  padding: 0;
   @extend %center;
   flex-direction: column;
+  overflow: hidden;
 }
 </style>

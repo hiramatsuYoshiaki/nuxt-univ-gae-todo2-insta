@@ -1,7 +1,39 @@
 <template>
   <div class="conContent">
-    <div class="flex-container">
-      <div class="two-col">
+    <div class="content-wrape">
+      <div class="left-side sec-50">
+        <div class="inner-wrape title">
+          <h5>INSTA TODOS</h5>
+          <h6>h-works</h6>
+          <!-- <a href="http://tourdehdr.sakuraweb.com/h-works-website/index.html">
+              <h5>HIRAMATSU WORKS</h5>
+            </a>
+            <a href="http://tourdehdr.sakuraweb.com/h-works-website/index.html">
+              <h5>Portfolio Site</h5>
+            </a>
+            <a href="http://tourdehdr.sakuraweb.com/h-works-website/index.html">
+              <h6>
+                http://tourdehdr.sakuraweb.com/h-works-website/index.html
+              </h6>
+            </a> -->
+          <!-- <br />
+            <p>
+              このWEBサイトは、作品をご覧いただき、デザイン、コーディング、プログラミングなどのスキルレベルをご確認いただくために作成しております。
+            </p> -->
+        </div>
+      </div>
+      <div class="left-side sec-50">
+        <div class="inner-wrape info">
+          <h6>
+            <i class="far fa-envelope" /><span>hiramatsu3300@gmail.com</span>
+          </h6>
+          <h6><i class="fas fa-phone" /><span>111-222-33333</span></h6>
+          <br />
+          <h6>Okayama</h6>
+          <h6>Japan</h6>
+        </div>
+      </div>
+      <!-- <div class="two-col">
         <div class="col-block left-block">
           <div class="section-block left-section">
             <div class="contact-title">
@@ -11,9 +43,9 @@
                 >
                   <h1>HIRAMATSU WORKS</h1>
                   <h5>Portfolio Site</h5>
-                  <!-- <h5>
+                  <h5>
                     http://tourdehdr.sakuraweb.com/h-works-website/index.html
-                  </h5> -->
+                  </h5>
                 </a>
               </div>
               <br />
@@ -37,7 +69,7 @@
             <p>japan</p>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -54,86 +86,82 @@ export default {
 .conContent {
   position: relative;
   width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 2rem 2rem;
-  @media (min-width: 768px) {
-    padding: 8rem 8rem;
-  }
-  color: #fff;
-  a {
-    color: #fff;
-    text-decoration: none;
-    cursor: pointer;
-    :hover {
-      opacity: 0.5;
-    }
-  }
-}
-.flex-container {
-  width: 100%;
   height: 100%;
-  // overflow-y: scroll;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  // height: calc(100vh - #{$header-height});
+  padding: 0;
+  margin: 0;
   @media (min-width: 992px) {
-    flex-direction: row;
-  }
-}
-.two-col {
-  width: 90vw;
-  height: 100%;
-  padding: 2rem 2rem;
-  @media (min-width: 992px) {
-    width: 50%;
     padding: 8rem;
   }
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: $footer-color-color;
-  h1 {
-    font-size: 1rem;
-    line-height: 1.2rem;
-    @media (min-width: 992px) {
-      font-size: 2.4rem;
-      line-height: 2.4rem;
-      margin-bottom: 2rem;
-    }
-  }
-  h5 {
-    font-size: 1rem;
-    line-height: 1.2rem;
-    @media (min-width: 992px) {
-      font-size: 1.8rem;
-      line-height: 1.8rem;
-    }
-  }
-  p {
-    font-size: 0.8rem;
-    line-height: 1rem;
-    @media (min-width: 992px) {
-      font-size: 1rem;
-      line-height: 1.8rem;
-    }
-  }
+
+  // @media (min-width: 768px) {
+  //   margin: 8rem 8rem;
+  // }
+  // color: #fff;
+  // a {
+  //   color: #fff;
+  //   text-decoration: none;
+  //   cursor: pointer;
+  //   :hover {
+  //     opacity: 0.5;
+  //   }
+  // }
 }
-.col-block {
-  position: relative;
+.content-wrape {
   width: 100%;
   height: 100%;
-  overflow: hidden;
-  text-align: center;
   display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  @media (min-width: 992px) {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  background-color: $footer-color-color;
+}
+.sec-50 {
+  width: 100%;
+  height: 50%;
+  padding: 1rem;
+  @media (min-width: 992px) {
+    width: 50%;
+    height: 100%;
+  }
+}
+
+.inner-wrape {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.title,
+.info {
+  h5 {
+    font-size: 2rem;
+  }
+  h6 {
+    font-size: 1.2rem;
+  }
   @media (min-width: 992px) {
-    text-align: left;
+    h5 {
+      font-size: 3rem;
+    }
+    h6 {
+      font-size: 1.6rem;
+    }
+  }
+  @media (min-width: 1440px) {
+    h5 {
+      font-size: 4rem;
+    }
+    h6 {
+      font-size: 2.2rem;
+    }
   }
 }
 </style>

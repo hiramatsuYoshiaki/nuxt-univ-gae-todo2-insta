@@ -521,13 +521,15 @@ export default {
   //   window.removeEventListener('scroll', this.handleScroll);
   // },
   mounted() {
+    // console.log('conabout mounted')
+    this.$nuxt.$loading.finish()
     this.$store.commit('clearAddTodoError')
     this.$store.commit('clearMessage')
     // console.log('conponents/content/about/conAbout.vue mounteded()')
     // this.$store.commit('clearAuthError')
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        console.log('login')
+        // console.log('login')
         // console.log('about uid: ' + user.uid)
         // console.log('about email: ' + user.email)
         // console.log('displayName: ' + user.displayName)
@@ -550,17 +552,16 @@ export default {
           this.$store.dispatch(INIT_TODO, this.user.uid)
           // なにかしらの処理
           // loding--------------------------------------------------------------------------------
-          console.log('conAbout  mounted loding')
-          window.instgrm.Embeds.process()
-          this.$nextTick(() => {
-            this.$nuxt.$loading.start()
-            console.log('conAbout  $nuxt.$loading.start')
-            setTimeout(() => this.$nuxt.$loading.finish(), 10000)
-          })
+          // window.instgrm.Embeds.process()
+          // this.$nextTick(() => {
+          //   this.$nuxt.$loading.start()
+          //   setTimeout(() => this.$nuxt.$loading.finish(), 10000)
+          // })
         })
-      } else {
-        console.log('logout')
       }
+      // else {
+      //   console.log('logout')
+      // }
     })
   },
 

@@ -339,7 +339,7 @@ $duration: 1.4s;
   align-items: flex-start;
   padding: 2rem 0.5rem;
   @media (min-width: 768px) {
-    padding: 8rem 8rem;
+    padding: 2rem 4rem;
   }
 }
 .auth {

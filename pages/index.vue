@@ -2,10 +2,6 @@
   <div class="container">
     <div class="bgImageFull">
       <transition name="bgTran" appear>
-        <!-- <div
-          class="bgImage"
-          :style="{ 'background-image': 'url(' + img + ') ' }"
-        > -->
         <div
           class="bgImage"
           :style="{ background: `center center / cover no-repeat url(${img})` }"
@@ -24,7 +20,6 @@
     </div>
     <transition name="mainCon" appear>
       <div class="content-main">
-        <!-- <conWorks /> -->
         <conTop />
       </div>
     </transition>
@@ -34,15 +29,13 @@
       </div>
     </transition>
     <transition appear name="transitionScreen">
-      <TransitionScreen v-if="page === '/works'" />
+      <TransitionScreen v-if="page === '/'" />
     </transition>
   </div>
 </template>
 
 <script>
 import TransitionScreen from '~/components/transition/TransitionScreen.vue'
-
-// import conWorks from '~/components/content/works/conWorks.vue'
 import conTop from '~/components/content/top/conTop.vue'
 import ConHeader from '~/components/content/ConHeader.vue'
 import ContentFooter from '~/components/content/ContentFooter.vue'
@@ -51,7 +44,6 @@ export default {
   components: {
     TransitionScreen,
     ConHeader,
-    // conWorks,
     conTop,
     ContentFooter
   },
@@ -60,7 +52,7 @@ export default {
       img: require('~/assets/img/girl.jpg'),
       pageTitle: 'SNS',
       pageSubTitle: 'Instagram',
-      pageDiscription: 'Instagram embeds',
+      pageDiscription: '埋め込みコードで表示する',
       pageDiscriptionDetail: 'Instagram投稿をコレクションする'
     }
   },
@@ -85,7 +77,6 @@ export default {
   methods: {
     link_commit(linkPath) {
       this.$store.commit('pagePathSet', linkPath)
-      console.log('linkPath: ' + linkPath)
       setTimeout(() => {
         this.$router.push({ path: linkPath })
       }, 500)
@@ -117,6 +108,10 @@ export default {
   @extend %center;
   flex-direction: column;
 }
+// .content {
+//   width: 100vw;
+//   height: 100vh;
+// }
 .content-header {
   width: 100vw;
   height: 35vh;

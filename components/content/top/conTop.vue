@@ -32,16 +32,20 @@
             <h6>見た素敵な写真を．．．</h6>
           </div>
           <div class="top-image1">
-            <img
-              class="img-ipad"
-              src="~assets/img/instaIpad.png"
-              alt="insta iPad"
-            />
-            <img
-              class="img-iphone"
-              src="~assets/img/insta_iPhone8.png"
-              alt="insta iPhne8"
-            />
+            <div class="cache-image">
+              <img
+                class="img-ipad"
+                src="~assets/img/instaIpad.png"
+                alt="insta iPad"
+              />
+              <!-- </div>
+            <div class="cache-image"> -->
+              <img
+                class="img-iphone"
+                src="~assets/img/insta_iPhone8.png"
+                alt="insta iPhne8"
+              />
+            </div>
           </div>
           <div class="auth-guid">
             フォトアクティビティが楽しくなる。Todosリストに、お気に入りのInstagramを表示できる。
@@ -183,11 +187,11 @@ export default {
         // this.setUser(loginUser)
         this.$store.dispatch(GET_REGISTORY, loginUser)
 
-        console.log('not setTimeout: ' + this.user) // ここだと取得できない
-        setTimeout(() => {
-          console.log('setTimeout: ' + this.user.email) // ここだと取得できる
-          // なにかしらの処理
-        })
+        // console.log('not setTimeout: ' + this.user) // ここだと取得できない
+        // setTimeout(() => {
+        // console.log('setTimeout: ' + this.user.email) // ここだと取得できる
+        // なにかしらの処理
+        // })
       }
     })
   },
@@ -285,9 +289,9 @@ export default {
             })
           })
           .then((user) => {
-            const lp = '/about'
-            this.link_commit(lp)
             this.isWaiting = false
+            const lp = '/crud'
+            this.link_commit(lp)
           })
           .catch((error) => {
             // alert('signin error' + error)
@@ -301,9 +305,11 @@ export default {
           .auth()
           .signInWithEmailAndPassword(this.email, this.password)
           .then((user) => {
-            const lp = '/about'
-            this.link_commit(lp)
             this.isWaiting = false
+            const lp = '/crud'
+            // setTimeout(() => {
+            this.link_commit(lp)
+            // }, 1000)
           })
           .catch((error) => {
             // alert('login error' + error)
@@ -327,25 +333,17 @@ export default {
         .signOut()
         .then(() => {
           this.$store.commit('setUser', null)
-          // this.setUser(null)
         })
         .catch((error) => {
-          // alert('logout error' + error)
+          console.log('logout error' + error)
         })
     },
     link_commit(linkPath) {
-      this.active = true
+      // this.active = true
       this.$store.commit('pagePathSet', linkPath)
       setTimeout(() => {
-        if (linkPath === '/about') {
-          location.href = linkPath // reload
-        } else {
-          this.$router.push({ path: linkPath }) // non-leload
-        }
+        this.$router.push({ path: linkPath }) // non-leload
       }, 500)
-      // setTimeout(() => {
-      //   this.$router.push({ path: linkPath })
-      // }, 500)
     }
   }
 }
@@ -357,15 +355,12 @@ $duration: 1.4s;
   position: relative;
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  //   padding: 2rem 0.5rem;
-  //   @media (min-width: 768px) {
-  //     padding: 8rem 8rem;
-  //   }
+  padding: 2rem 0.5rem;
+  @media (min-width: 768px) {
+    padding: 2rem 4rem;
+  }
 }
+
 .loading-wrape {
   width: 100%;
   height: 100%;
@@ -379,6 +374,7 @@ $duration: 1.4s;
   }
 }
 .content-wrap {
+  position: relative;
   width: 100%;
   height: 100%;
   display: flex;
@@ -391,15 +387,14 @@ $duration: 1.4s;
     align-items: flex-start;
   }
 }
-.top-image {
-  width: 100vw;
-  //   height: 50vh;
+
+.top-image,
+.auth {
+  width: 100%;
   height: 100%;
-  //   border: 1px solid green;
   padding: 2rem;
   @media (min-width: 992px) {
-    width: 50vw;
-    // height: 100vh;
+    width: 50%;
     height: 100%;
     padding: 4rem 4rem;
     flex-direction: row;
@@ -407,8 +402,7 @@ $duration: 1.4s;
     align-items: flex-start;
   }
   @media (min-width: 1440px) {
-    width: 50vw;
-    // height: 100vh;
+    width: 50%;
     height: 100%;
     padding: 4rem 8rem;
     flex-direction: row;
@@ -416,19 +410,20 @@ $duration: 1.4s;
     align-items: flex-start;
   }
 }
-.img-iphone {
-  width: 10rem;
-  height: auto;
+.cache-image {
+  width: 100%;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
   @media (min-width: 992px) {
-    width: 8rem;
-  }
-  @media (min-width: 1440px) {
-    width: 10rem;
+    flex-direction: row;
   }
 }
 .img-ipad {
   width: 18rem;
   height: auto;
+  margin: 1rem;
   @media (min-width: 992px) {
     width: 12rem;
   }
@@ -436,20 +431,16 @@ $duration: 1.4s;
     width: 18rem;
   }
 }
-.auth {
-  width: 100vw;
-  //   height: 50vh;
-  height: 100%;
-  padding: 2rem;
-  //   border: 1px solid red;
+
+.img-iphone {
+  width: 10rem;
+  height: auto;
+  margin: 1rem;
   @media (min-width: 992px) {
-    width: 50vw;
-    // height: 100vh;
-    height: 100%;
-    padding: 4rem 4rem;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start;
+    width: 8rem;
+  }
+  @media (min-width: 1440px) {
+    width: 10rem;
   }
 }
 .auth-title {
@@ -472,7 +463,10 @@ $duration: 1.4s;
   color: dodgerblue;
 }
 .auth-guid {
+  width: 100%;
   margin-top: 2rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 .add-btn button {
   border: none;

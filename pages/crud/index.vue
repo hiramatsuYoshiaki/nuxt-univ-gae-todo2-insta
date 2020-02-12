@@ -31,13 +31,10 @@
         <ContentFooter />
       </div>
     </transition>
-
+    <!-- <div v-if="!loaded" class="loading" /> -->
     <transition appear name="transitionScreen">
-      <TransitionScreen v-if="page === '/about'" />
+      <TransitionScreen v-if="page === '/crud'" />
     </transition>
-    <div v-if="!loaded" class="loading">
-      <!-- <h1>login ...</h1> -->
-    </div>
   </div>
 </template>
 <script>
@@ -96,6 +93,10 @@ export default {
   //   console.log('pages/about.vue created()')
   // },
   mounted() {
+    // console.log('crud/index mounted----------------')
+    this.$nuxt.$loading.finish()
+    // console.log('window.instgrm.Embeds.process()')
+    window.instgrm.Embeds.process()
     // console.log('pages/about.vue mounted()')
     setTimeout(() => {
       if (!this.isAuthenticated) {
@@ -115,8 +116,15 @@ export default {
         //   console.log('crud index  $nuxt.$loading.start')
         //   setTimeout(() => this.$nuxt.$loading.finish(), 10000)
         // })
+
+        // なにかしらの処理
+        // loding--------------------------------------------------------------------------------
+        this.$nextTick(() => {
+          this.$nuxt.$loading.start()
+          setTimeout(() => this.$nuxt.$loading.finish(), 14000)
+        })
       }
-    }, 0)
+    }, 1000)
     // console.log('mounted')
     // firebase.auth().onAuthStateChanged(async (user) => {
     //   if (user) {
@@ -126,9 +134,9 @@ export default {
     //     await this.link_commit('works')
     //   }
     // })
-    // setTimeout(() => {
-    this.loaded = true
-    // }, 1000)
+    setTimeout(() => {
+      this.loaded = true
+    }, 500)
   },
   methods: {
     link_commit(linkPath) {
@@ -167,23 +175,16 @@ export default {
 .content-header {
   width: 100vw;
   height: 35vh;
-  // padding: 1rem 1rem;
-  // border: 1px solid yellow;
 }
 .content-main {
-  // height: 75vh;
   width: 100vw;
   background-color: $main-contents-color;
   color: $main-contents-text;
-  // padding-bottom:20rem;
-  // padding-left: 2rem;
-  // border: 1px solid orangered;
 }
 .content-footer {
   width: 100vw;
   @extend %center;
   flex-direction: column;
-  // border: 1px solid red;
 }
 .loading {
   @extend %center;
@@ -196,6 +197,6 @@ export default {
   color: #fff;
   margin: 0;
   padding: 0;
-  z-index: 1000;
+  // z-index: 1000;
 }
 </style>

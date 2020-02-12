@@ -25,7 +25,7 @@
               CRUD
             </div>
             <div class="menu_underline" />
-          </div> -->
+          </div>-->
           <div class="menu-item-box">
             <div
               class="menu_link"
@@ -63,7 +63,7 @@
               </div>
             </div>
             <div class="menu_underline" />
-          </div> -->
+          </div>-->
         </div>
       </div>
     </div>
@@ -88,9 +88,8 @@
                 class="menu_link"
                 :class="{ menu_item_visible: page === '/works' }"
                 @click="link_commit('/works')"
+                >Auth</a
               >
-                Auth
-              </a>
               <div class="menu_underline" />
             </div>
             <!-- <div class="menu-item-box">
@@ -102,15 +101,14 @@
                 CRUD
               </a>
               <div class="menu_underline" />
-            </div> -->
+            </div>-->
             <div class="menu-item-box">
               <a
                 class="menu_link"
                 :class="{ menu_item_visible: page === '/crud' }"
                 @click="link_commit('/crud')"
+                >CRUD</a
               >
-                CRUD
-              </a>
               <div class="menu_underline" />
             </div>
 
@@ -119,9 +117,8 @@
                 class="menu_link"
                 :class="{ menu_item_visible: page === '/contact' }"
                 @click="link_commit('/contact')"
+                >CONTACT</a
               >
-                CONTACT
-              </a>
               <div class="menu_underline" />
             </div>
 
@@ -144,7 +141,7 @@
                 </div>
               </a>
               <div class="menu_underline" />
-            </div> -->
+            </div>-->
           </div>
         </div>
       </div>
@@ -165,13 +162,6 @@
 </template>
 <script>
 export default {
-  // transition: 'a-slide',
-  //   props: {
-  //     msg: {
-  //       type: String,
-  //       default: ''
-  //     }
-  //   },
   data() {
     return {
       active: true
@@ -181,24 +171,13 @@ export default {
     page() {
       return this.$store.state.page
     }
-    //   isUser() {
-    //     return this.$store.state.isLogin
-    //   },
-    //   userPhotoUrl() {
-    //     return this.$store.state.PhotoUrl
-    //   }
   },
   methods: {
     link_commit(linkPath) {
       this.active = true
       this.$store.commit('pagePathSet', linkPath)
-      // console.log('linkPath: ' + linkPath)
       setTimeout(() => {
-        if (linkPath === '/about') {
-          location.href = linkPath // reload
-        } else {
-          this.$router.push({ path: linkPath }) // non-leload
-        }
+        this.$router.push({ path: linkPath })
       }, 500)
     }
   }
@@ -226,12 +205,8 @@ export default {
   left: 0;
   width: 100vw;
   z-index: 1000;
-  // border-bottom: 1px solid rgba(250, 250, 250, 0.1);
-  // background-color: $footer-color-color;
-  // background-color: #212121;
   margin: 0;
   padding: 0;
-  border: 1px border purple;
 }
 //nav-menu---------------------------------------
 .nav-menu {
@@ -242,7 +217,7 @@ export default {
   height: $header-height;
   display: flex;
   flex-direction: row;
-  border: 1px border red;
+  // border: 1px border red;
   // background-color: $footer-color-color;
   background-color: none;
 }
@@ -407,7 +382,6 @@ export default {
   width: 2.5rem;
   height: 2.5rem;
   margin-bottom: 0.25rem;
-  // display: block;
   @media (min-width: 992px) {
     width: 2.5rem;
     height: 2.5rem;
